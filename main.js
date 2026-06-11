@@ -1,3 +1,5 @@
+import './styles.css'
+
 // Mobile menu
 const menuBtn = document.getElementById('menu-btn')
 const mobileMenu = document.getElementById('mobile-menu')
@@ -16,18 +18,7 @@ if (menuBtn && mobileMenu) {
   })
 }
 
-// Form submit
-const form = document.getElementById('lead-form')
-
-if (form) {
-  form.addEventListener('submit', function (e) {
-    e.preventDefault()
-    alert('Thank you! We will contact you soon.')
-    form.reset()
-  })
-}
-
-// Scroll animations
+// Scroll fade-in animations
 const scrollElements = document.querySelectorAll('.scroll-animate')
 
 const observer = new IntersectionObserver(
@@ -39,9 +30,11 @@ const observer = new IntersectionObserver(
       }
     })
   },
-  { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
 )
 
 scrollElements.forEach(function (el) {
+  // Skip hero top-level blocks — they animate on page load via CSS
+  if (el.closest('.hero-text-block') || el.closest('.hero-image-col')) return
   observer.observe(el)
 })
